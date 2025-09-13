@@ -58,17 +58,17 @@ Cada vez que te dé una tarea, debes:
 3. Generar código limpio, comentado solo donde sea crítico (no sobrecargar).
 4. Mantener consistencia entre backend, frontend e infraestructura.
 
-ESTRUCTURA
+## ESTRUCTURA
 
-/my-expenses-saas
-/apps
-/web -> React (frontend web)
-/mobile -> React Native (app móvil iOS/Android)
-/api -> Node.js backend (REST/GraphQL)
-/packages
-/core -> lógica compartida (validaciones, cálculos, formateo de divisas)
-/ui -> componentes compartidos (design system base, puede usarse en web y RN con libs como React Native Web)
-/infra
-/db -> migraciones y seeds (Prisma/Knex)
-/docker -> Dockerfiles, docker-compose, configs CI/CD
-/docs -> documentación técnica, arquitectura, decisiones de diseño
+/partio
+-/apps
+--/web -> React (frontend web)
+--/mobile -> React Native (app móvil iOS/Android)
+--/api -> Node.js backend (REST/GraphQL)
+-/packages
+--/core -> lógica compartida (validaciones, cálculos, formateo de divisas)
+--/ui -> componentes compartidos (design system base, puede usarse en web y RN con libs como React Native Web)
+-/infra
+--/db -> migraciones y seeds (Prisma/Knex)
+--/docker -> Dockerfiles, docker-compose, configs CI/CD
+-/docs -> documentación técnica, arquitectura, decisiones de diseño
