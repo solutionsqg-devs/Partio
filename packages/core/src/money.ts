@@ -1,4 +1,4 @@
-import { Currency, Money, CurrencyRate, ValidationError } from './types.js';
+import { Currency, Money, CurrencyRate, ValidationError } from './types';
 
 /**
  * Utilidades para manejo de dinero y monedas

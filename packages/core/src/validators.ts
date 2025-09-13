@@ -1,6 +1,6 @@
 import { z } from 'zod';
-import { Currency, SplitType } from './types.js';
-import { isSupportedCurrency } from './money.js';
+import { Currency, SplitType } from './types';
+import { isSupportedCurrency } from './money';
 
 /**
  * Validadores usando Zod para el core de Partio

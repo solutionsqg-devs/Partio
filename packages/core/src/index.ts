@@ -10,7 +10,7 @@
  */
 
 // Exportar tipos
-export * from './types.js';
+export * from './types';
 
 // Exportar utilidades de dinero
 export {
@@ -28,7 +28,7 @@ export {
   getCurrencySymbol,
   isSupportedCurrency,
   getSupportedCurrencies,
-} from './money.js';
+} from './money';
 
 // Exportar calculadora de splits
 export {
@@ -36,7 +36,7 @@ export {
   validateSplitsTotal,
   calculateMemberBalances,
   getSplitSummary,
-} from './splits.js';
+} from './splits';
 
 // Exportar validadores
 export {
@@ -61,7 +61,7 @@ export {
   validatePassword,
   validateCurrency,
   validateAmount,
-} from './validators.js';
+} from './validators';
 
 // Exportar tipos de validadores
 export type {
@@ -69,7 +69,7 @@ export type {
   UpdateExpenseForm,
   CreateGroupForm,
   UpdateGroupForm,
-} from './validators.js';
+} from './validators';
 
 // Constantes útiles
 export const SUPPORTED_CURRENCIES = [

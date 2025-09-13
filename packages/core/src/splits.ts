@@ -6,7 +6,7 @@ import {
   SplitCalculationResult,
   ValidationError,
   CalculationError 
-} from './types.js';
+} from './types';
 
 /**
  * Calculadora de divisiones de gastos

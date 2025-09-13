@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "tsx watch src/server.ts",
+    "dev:simple": "tsx watch src/server-simple.ts",
     "build": "tsc",
     "start": "node dist/server.js",
     "migrate:dev": "prisma migrate dev",

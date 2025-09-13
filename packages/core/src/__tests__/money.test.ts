@@ -13,8 +13,8 @@ import {
   getCurrencySymbol,
   isSupportedCurrency,
   getSupportedCurrencies
-} from '../money.js';
-import { ValidationError } from '../types.js';
+} from '../money';
+import { ValidationError } from '../types';
 
 /**
  * Tests unitarios para utilidades de dinero

@@ -1,5 +1,5 @@
-import { calculateSplits, validateSplitsTotal, calculateMemberBalances } from '../splits.js';
-import { ExpenseMember, SplitCalculationInput } from '../types.js';
+import { calculateSplits, validateSplitsTotal, calculateMemberBalances } from '../splits';
+import { ExpenseMember, SplitCalculationInput } from '../types';
 
 /**
  * Tests unitarios para el calculador de splits

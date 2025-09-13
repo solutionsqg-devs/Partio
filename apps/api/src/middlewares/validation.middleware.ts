@@ -43,7 +43,9 @@ export const validate = (schemas: {
           details: error.errors.map(err => ({
             field: err.path.join('.'),
             message: err.message,
-            received: err.received,
+            code: err.code,
+            ...(('received' in err) && { received: err.received }),
+            ...(('expected' in err) && { expected: err.expected }),
           })),
         });
         return;
