@@ -1,9 +1,9 @@
-import { Router, Request, Response } from 'express';
+import { Router, Request, Response, type Router as ExpressRouter } from 'express';
 import { asyncHandler } from '@/middlewares/error.middleware.js';
 import { logger } from '@/lib/logger.js';
 import crypto from 'crypto';
 
-const router = Router();
+const router: ExpressRouter = Router();
 
 /**
  * Rutas de webhooks

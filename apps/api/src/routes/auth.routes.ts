@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import { Router, type Router as ExpressRouter } from 'express';
 import { AuthController } from '@/controllers/auth.controller.js';
 import { authMiddleware } from '@/middlewares/auth.middleware.js';
 import { validate } from '@/middlewares/validation.middleware.js';
@@ -9,7 +9,7 @@ import {
   changePasswordSchema,
 } from '@/schemas/auth.schemas.js';
 
-const router = Router();
+const router: ExpressRouter = Router();
 
 /**
  * Rutas de autenticación

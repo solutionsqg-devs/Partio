@@ -22,11 +22,17 @@
     "lint:fix": "eslint src --ext .ts --fix",
     "clean": "rm -rf dist"
   },
-  "keywords": ["expenses", "split", "saas", "api"],
+  "keywords": [
+    "expenses",
+    "split",
+    "saas",
+    "api"
+  ],
   "author": "Partio Team",
   "license": "MIT",
   "dependencies": {
     "@prisma/client": "^5.19.1",
+    "@types/helmet": "^4.0.0",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "express": "^4.19.2",

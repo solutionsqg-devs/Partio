@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
@@ -25,7 +25,7 @@ import { createExpenseSchema, groupExpensesParamsSchema } from '@/schemas/expens
  * Siguiendo principios de Clean Architecture y seguridad
  */
 
-const app = express();
+const app: express.Application = express();
 
 // Configuración de CORS
 const corsOptions = {
@@ -70,7 +70,7 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use(morgan('combined', { stream: morganStream }));
 
 // Health check endpoint
-app.get('/health', (req, res) => {
+app.get('/health', (req: Request, res: Response) => {
   res.status(200).json({
     success: true,
     message: 'API funcionando correctamente',
@@ -80,7 +80,7 @@ app.get('/health', (req, res) => {
 });
 
 // Endpoint de información de la API
-app.get('/', (req, res) => {
+app.get('/', (req: Request, res: Response) => {
   res.status(200).json({
     success: true,
     message: 'Partio API - SaaS de gastos compartidos',
@@ -102,36 +102,47 @@ app.use('/expenses', expensesRoutes);
 app.use('/webhooks', webhooksRoutes);
 
 // Rutas anidadas para gastos de grupos
-app.use('/groups/:groupId/expenses', authMiddleware, (req, res, next) => {
+app.use('/groups/:groupId/expenses', authMiddleware, (req: Request, res: Response, next: NextFunction) => {
   // Agregar groupId a los params para las rutas anidadas
-  req.params.groupId = req.params.groupId;
+  if (req.params.groupId) {
+    req.params.groupId = req.params.groupId;
+  }
   next();
 });
 
 // Crear gasto en un grupo específico
 app.post('/groups/:groupId/expenses', 
   authMiddleware,
-  validate(createExpenseSchema),
+  validate({
+    body: createExpenseSchema.shape.body,
+    params: createExpenseSchema.shape.params
+  }),
   ExpensesController.createExpense
 );
 
 // Obtener gastos de un grupo
 app.get('/groups/:groupId/expenses',
   authMiddleware,
-  validate(groupExpensesParamsSchema),
+  validate({
+    params: groupExpensesParamsSchema.shape.params,
+    query: groupExpensesParamsSchema.shape.query
+  }),
   ExpensesController.getGroupExpenses
 );
 
 // Obtener gastos del usuario en un grupo específico
 app.get('/groups/:groupId/expenses/me',
   authMiddleware,
-  validate(groupExpensesParamsSchema),
+  validate({
+    params: groupExpensesParamsSchema.shape.params,
+    query: groupExpensesParamsSchema.shape.query
+  }),
   ExpensesController.getUserExpensesInGroup
 );
 
 // Documentación de la API (Swagger)
 if (process.env.NODE_ENV !== 'production') {
-  app.get('/api-docs', (req, res) => {
+  app.get('/api-docs', (req: Request, res: Response) => {
     res.status(200).json({
       success: true,
       message: 'Documentación de la API disponible en /openapi.yaml',
@@ -147,11 +158,11 @@ app.use(notFoundHandler);
 app.use(errorHandler);
 
 // Manejo de errores no capturados
-process.on('unhandledRejection', (reason, promise) => {
+process.on('unhandledRejection', (reason: unknown, promise: Promise<unknown>) => {
   logger.error('Unhandled Rejection at:', { promise, reason });
 });
 
-process.on('uncaughtException', (error) => {
+process.on('uncaughtException', (error: Error) => {
   logger.error('Uncaught Exception:', error);
   process.exit(1);
 });

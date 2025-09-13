@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import { Router, type Router as ExpressRouter } from 'express';
 import { GroupsController } from '@/controllers/groups.controller.js';
 import { authMiddleware } from '@/middlewares/auth.middleware.js';
 import { validate } from '@/middlewares/validation.middleware.js';
@@ -9,7 +9,7 @@ import {
   addMemberSchema,
 } from '@/schemas/groups.schemas.js';
 
-const router = Router();
+const router: ExpressRouter = Router();
 
 /**
  * Rutas de grupos
