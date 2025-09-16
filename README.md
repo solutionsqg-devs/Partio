@@ -69,8 +69,33 @@ Partio es una plataforma moderna para gestionar gastos compartidos entre grupos 
 
 ## 🛠️ Setup Local
 
-### Prerrequisitos
+### 🚀 Setup Rápido (Para Probar)
 
+**Requisitos mínimos:**
+- Node.js 18+
+- pnpm (`npm install -g pnpm`)
+- Git
+
+```bash
+# 1. Clonar repositorio
+git clone https://github.com/solutionsqg-devs/Partio.git
+cd Partio
+
+# 2. Instalar dependencias
+pnpm install
+
+# 3. Iniciar backend (modo simple, sin DB)
+pnpm --filter api run dev:simple
+
+# 4. En otra terminal: iniciar frontend
+pnpm --filter web run dev
+
+# 5. Abrir http://localhost:3000 🎉
+```
+
+### 🐳 Setup Completo (Con Docker)
+
+**Prerrequisitos:**
 - Node.js 18+
 - pnpm 8+
 - Docker y Docker Compose
