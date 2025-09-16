@@ -2,22 +2,27 @@
 
 ## 📋 Requisitos Previos
 
-Antes de empezar, asegúrate de tener instalado:
+**Solo necesitas 3 cosas:**
 
-1. **Node.js** (versión 18 o superior)
+1. **Node.js** (versión 18 o superior) ⚠️ **OBLIGATORIO**
    - Descargar desde: https://nodejs.org/
    - Verificar: `node --version`
+   - **Nota**: El proyecto requiere Node.js 18+ (definido en package.json)
 
-2. **pnpm** (gestor de paquetes)
+2. **pnpm** (gestor de paquetes) ⚠️ **OBLIGATORIO**
 
    ```bash
    npm install -g pnpm
    # Verificar: pnpm --version
    ```
+   - **¿Por qué pnpm?** El proyecto usa `pnpm workspaces` para el monorepo
+   - **npm NO funcionará** correctamente con este proyecto
 
-3. **Git**
+3. **Git** ⚠️ **OBLIGATORIO**
    - Descargar desde: https://git-scm.com/
    - Verificar: `git --version`
+
+**¡Eso es todo!** No necesitas Docker, PostgreSQL, Redis ni nada más para probar la aplicación.
 
 ## 🔄 Clonar el Proyecto
 
@@ -31,8 +36,66 @@ cd Partio
 
 ## 📦 Instalación de Dependencias
 
+### ✅ **Respuesta Corta: SÍ, solo con `pnpm install`**
+
 ```bash
 # Instalar todas las dependencias del monorepo
+pnpm install
+```
+
+### 🔍 **¿Qué hace este comando?**
+
+El comando `pnpm install` automáticamente:
+
+1. **Lee `pnpm-workspace.yaml`** y detecta todos los sub-proyectos
+2. **Instala dependencias del root** (ESLint, Prettier, TypeScript)
+3. **Instala dependencias del API** (`apps/api/package.json`)
+4. **Instala dependencias del Web** (`apps/web/package.json`)
+5. **Crea enlaces simbólicos** entre proyectos del monorepo
+6. **Optimiza el almacenamiento** (pnpm es más eficiente que npm)
+
+### 📊 **Dependencias que se instalan:**
+
+**Backend (`apps/api`):**
+- Express, Prisma, JWT, Zod, etc.
+
+**Frontend (`apps/web`):**
+- React, Vite, Radix UI, Tailwind CSS, Framer Motion, etc.
+
+**Root (herramientas compartidas):**
+- TypeScript, ESLint, Prettier
+
+### ⚠️ **Importante:**
+- **NO uses `npm install`** - no funcionará correctamente
+- **NO instales en subdirectorios** - hazlo solo desde la raíz
+- **Tiempo estimado**: 2-5 minutos dependiendo de tu conexión
+
+### 🔍 **Verificar que todo se instaló correctamente:**
+
+```bash
+# Verificar estructura de node_modules
+ls node_modules/@radix-ui  # Debe mostrar componentes de Radix UI
+ls apps/api/node_modules   # Debe existir
+ls apps/web/node_modules   # Debe existir
+
+# Verificar que los comandos funcionan
+pnpm --filter api run --help
+pnpm --filter web run --help
+```
+
+### 🐛 **Si algo falla en la instalación:**
+
+```bash
+# Limpiar todo y reinstalar
+rm -rf node_modules
+rm -rf apps/*/node_modules
+rm pnpm-lock.yaml
+pnpm install
+
+# En Windows (PowerShell):
+Remove-Item -Recurse -Force node_modules
+Remove-Item -Recurse -Force apps/*/node_modules
+Remove-Item pnpm-lock.yaml
 pnpm install
 ```
 

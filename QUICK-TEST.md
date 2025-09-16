@@ -13,8 +13,14 @@ git --version
 ```bash
 git clone https://github.com/solutionsqg-devs/Partio.git
 cd Partio
-pnpm install
+pnpm install    # ⚠️ SOLO pnpm (no npm) - instala TODO automáticamente
 ```
+
+**¿Qué instala `pnpm install`?**
+- ✅ Dependencias del backend (Express, Prisma, etc.)
+- ✅ Dependencias del frontend (React, Radix UI, etc.)
+- ✅ Herramientas compartidas (TypeScript, ESLint, etc.)
+- ✅ Enlaces entre proyectos del monorepo
 
 ### 3. **Iniciar Servicios**
 
