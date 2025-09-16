@@ -19,6 +19,7 @@ Partio es una plataforma moderna para gestionar gastos compartidos entre grupos 
 ### Stack Tecnológico
 
 **Backend**
+
 - Node.js + Express + TypeScript
 - PostgreSQL + Prisma ORM
 - Redis (cache y colas)
@@ -26,12 +27,14 @@ Partio es una plataforma moderna para gestionar gastos compartidos entre grupos 
 - Docker + Kubernetes
 
 **Frontend**
+
 - React + Vite + TypeScript
 - React Native (móvil)
 - PWA capabilities
 - Tailwind CSS
 
 **DevOps**
+
 - GitHub Actions (CI/CD)
 - Docker Compose (desarrollo)
 - Kubernetes (producción)
@@ -77,38 +80,45 @@ Partio es una plataforma moderna para gestionar gastos compartidos entre grupos 
 ### Instalación Rápida
 
 1. **Clonar el repositorio**
+
 ```bash
 git clone https://github.com/tu-org/partio.git
 cd partio
 ```
 
 2. **Instalar dependencias**
+
 ```bash
 pnpm install
 ```
 
 3. **Configurar variables de entorno**
+
 ```bash
 cp apps/api/env.example apps/api/.env
 # Editar apps/api/.env con tus configuraciones
 ```
 
 4. **Levantar servicios con Docker**
+
 ```bash
 pnpm run docker:dev
 ```
 
 5. **Ejecutar migraciones**
+
 ```bash
 pnpm run migrate:dev
 ```
 
 6. **Cargar datos de ejemplo**
+
 ```bash
 pnpm run seed
 ```
 
 7. **Iniciar desarrollo**
+
 ```bash
 pnpm run dev
 ```
@@ -116,7 +126,7 @@ pnpm run dev
 ### URLs de Desarrollo
 
 - **API**: http://localhost:4000
-- **Web App**: http://localhost:5173
+- **Web App**: http://localhost:3000 ✅ (React + Vite + Radix UI)
 - **API Docs**: http://localhost:4000/api-docs
 - **Adminer (DB)**: http://localhost:8080
 - **Redis Commander**: http://localhost:8081
@@ -124,6 +134,7 @@ pnpm run dev
 ## 📚 Comandos Disponibles
 
 ### Desarrollo
+
 ```bash
 pnpm dev              # Iniciar todos los servicios en desarrollo
 pnpm start:api        # Solo API
@@ -132,6 +143,7 @@ pnpm start:mobile     # Solo Mobile App
 ```
 
 ### Base de Datos
+
 ```bash
 pnpm migrate:dev      # Ejecutar migraciones en desarrollo
 pnpm migrate:deploy   # Ejecutar migraciones en producción
@@ -139,6 +151,7 @@ pnpm seed             # Cargar datos de ejemplo
 ```
 
 ### Testing
+
 ```bash
 pnpm test             # Ejecutar todos los tests
 pnpm test:watch       # Tests en modo watch
@@ -146,6 +159,7 @@ pnpm test:coverage    # Tests con coverage
 ```
 
 ### Linting y Formato
+
 ```bash
 pnpm lint             # Ejecutar ESLint
 pnpm lint:fix         # Ejecutar ESLint con auto-fix
@@ -153,6 +167,7 @@ pnpm format           # Formatear código con Prettier
 ```
 
 ### Build y Deploy
+
 ```bash
 pnpm build            # Build de producción
 pnpm docker:dev       # Levantar con Docker Compose
@@ -185,6 +200,7 @@ CORS_ORIGIN="http://localhost:3000,http://localhost:5173"
 ### Docker Compose
 
 El archivo `infra/docker/docker-compose.yml` incluye:
+
 - PostgreSQL 15
 - Redis 7
 - Adminer (administración de BD)
@@ -215,6 +231,7 @@ pnpm test:coverage
 ## 📖 Documentación de la API
 
 La API está documentada con OpenAPI 3.0. Acceder a:
+
 - **Swagger UI**: http://localhost:4000/api-docs
 - **OpenAPI Spec**: `apps/api/src/openapi.yaml`
 
@@ -238,11 +255,13 @@ DELETE /expenses/:id         # Eliminar gasto
 ## 🚀 Deployment
 
 ### Desarrollo
+
 ```bash
 docker-compose -f infra/docker/docker-compose.yml up --build
 ```
 
 ### Producción con Kubernetes
+
 ```bash
 kubectl apply -f infra/k8s/
 ```
@@ -250,6 +269,7 @@ kubectl apply -f infra/k8s/
 ### CI/CD
 
 El pipeline de GitHub Actions incluye:
+
 - ✅ Linting y formato
 - ✅ Tests unitarios e integración
 - ✅ Build de aplicaciones
@@ -277,11 +297,43 @@ El pipeline de GitHub Actions incluye:
 
 MIT License - ver [LICENSE](LICENSE) para detalles.
 
+## 🌐 Aplicación Web
+
+La aplicación web está construida con **React + Vite + TypeScript + Radix UI** y ofrece una experiencia moderna y responsiva.
+
+### Características de la Web
+
+- ✅ **Autenticación completa**: Login/Signup con validación
+- ✅ **Dashboard intuitivo**: Vista general de grupos y estadísticas
+- ✅ **Gestión de grupos**: Crear, ver y administrar grupos
+- ✅ **Interfaz moderna**: Radix UI + Tailwind CSS
+- ✅ **PWA Ready**: Funcionalidad offline y instalable
+- ✅ **Responsive**: Optimizada para móvil y desktop
+- ✅ **TypeScript**: Tipado estricto y autocompletado
+
+### Flujo de Usuario
+
+1. **Registro/Login**: http://localhost:3000
+2. **Dashboard**: Vista de grupos y estadísticas
+3. **Crear Grupo**: Formulario con validación
+4. **Detalle de Grupo**: Balances y gastos recientes
+5. **Agregar Gastos**: Formulario inteligente de splits
+
+### Desarrollo Web
+
+```bash
+# Solo la aplicación web
+pnpm --filter web run dev
+
+# Con hot reload y proxy al API
+# Automáticamente proxy /api/* → http://localhost:4000
+```
+
 ## 👥 Equipo
 
 - **Arquitectura**: Clean Architecture + SOLID
 - **Backend**: Node.js + Express + TypeScript + Prisma
-- **Frontend**: React + Vite + TypeScript
+- **Frontend**: React + Vite + TypeScript + Radix UI ✅
 - **Mobile**: React Native + TypeScript
 - **DevOps**: Docker + Kubernetes + GitHub Actions
 

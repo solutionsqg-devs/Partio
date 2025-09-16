@@ -11,12 +11,14 @@ Partio es un SaaS de gastos compartidos construido siguiendo principios de **Cle
 **Decisión**: Usar un monorepo para gestionar múltiples aplicaciones y paquetes.
 
 **Razones**:
+
 - Facilita el desarrollo y mantenimiento de código compartido
 - Permite versionado conjunto de componentes relacionados
 - Simplifica CI/CD y deployment
 - Mejor experiencia de desarrollo con TypeScript
 
 **Trade-offs**:
+
 - ✅ Código compartido fácil de mantener
 - ✅ Refactoring cross-package simplificado
 - ❌ Repositorio más grande
@@ -27,6 +29,7 @@ Partio es un SaaS de gastos compartidos construido siguiendo principios de **Cle
 **Decisión**: Implementar Clean Architecture con separación clara de capas.
 
 **Estructura**:
+
 ```
 src/
 ├── controllers/     # Capa de presentación (HTTP)
@@ -37,6 +40,7 @@ src/
 ```
 
 **Beneficios**:
+
 - Testabilidad alta
 - Bajo acoplamiento
 - Fácil mantenimiento
@@ -45,6 +49,7 @@ src/
 ### 3. Stack Tecnológico
 
 #### Backend
+
 - **Node.js + Express**: Ecosistema maduro, performance adecuada
 - **TypeScript**: Type safety, mejor DX
 - **Prisma + PostgreSQL**: ORM type-safe, ACID compliance para finanzas
@@ -52,11 +57,13 @@ src/
 - **JWT**: Autenticación stateless
 
 #### Frontend
+
 - **React + Vite**: Ecosistema maduro, hot reload rápido
 - **React Native**: Código compartido para móvil
 - **PWA**: Funcionalidad offline
 
 #### DevOps
+
 - **Docker**: Containerización para portabilidad
 - **Kubernetes**: Orquestación y escalado
 - **GitHub Actions**: CI/CD integrado
@@ -64,6 +71,7 @@ src/
 ### 4. Seguridad
 
 **Implementaciones**:
+
 - Autenticación JWT con refresh tokens
 - Rate limiting por endpoint
 - Validación estricta de inputs (Zod)
@@ -72,6 +80,7 @@ src/
 - Sanitización de datos
 
 **Para Producción**:
+
 - HTTPS obligatorio
 - Secrets en KMS/Vault
 - Auditoría de dependencias
@@ -80,12 +89,14 @@ src/
 ### 5. Escalabilidad
 
 **Horizontal**:
+
 - API stateless
 - Cache distribuido (Redis)
 - Load balancing
 - HPA en Kubernetes
 
 **Vertical**:
+
 - Optimización de queries
 - Indexación de BD
 - Connection pooling
@@ -93,16 +104,19 @@ src/
 ### 6. Observabilidad
 
 **Logging**:
+
 - Structured logging (Winston)
 - Correlation IDs
 - Diferentes niveles por entorno
 
 **Métricas**:
+
 - Health checks
 - Performance metrics
 - Business metrics
 
 **Monitoreo**:
+
 - Prometheus + Grafana
 - Alertas automáticas
 - Tracing distribuido
@@ -110,18 +124,23 @@ src/
 ## Patrones Implementados
 
 ### 1. Repository Pattern
+
 Abstrae el acceso a datos, facilita testing y cambio de persistencia.
 
 ### 2. Service Layer
+
 Contiene lógica de negocio, orquesta repositorios y validaciones.
 
 ### 3. Middleware Pattern
+
 Cross-cutting concerns como autenticación, logging, rate limiting.
 
 ### 4. Factory Pattern
+
 Para creación de objetos complejos (Money, Splits).
 
 ### 5. Strategy Pattern
+
 Para diferentes tipos de división de gastos (Equal, Exact, Percentage).
 
 ## Estructura de Datos
@@ -168,11 +187,13 @@ Expenses → Split Calculator → Balance Aggregator → Settlement Suggestions
 ## Deployment
 
 ### Desarrollo
+
 - Docker Compose para servicios locales
 - Hot reload para desarrollo rápido
 - Base de datos y Redis containerizados
 
 ### Producción
+
 - Kubernetes para orquestación
 - Horizontal Pod Autoscaler
 - Ingress con SSL termination
@@ -181,11 +202,13 @@ Expenses → Split Calculator → Balance Aggregator → Settlement Suggestions
 ## Testing
 
 ### Estrategia
+
 - Unit tests: Lógica de negocio (>90% coverage)
 - Integration tests: APIs y base de datos
 - E2E tests: Flujos críticos de usuario
 
 ### Herramientas
+
 - Jest para unit/integration tests
 - Supertest para API testing
 - Cypress para E2E (futuro)
@@ -193,17 +216,20 @@ Expenses → Split Calculator → Balance Aggregator → Settlement Suggestions
 ## Consideraciones de Performance
 
 ### Base de Datos
+
 - Índices en campos frecuentemente consultados
 - Connection pooling
 - Query optimization
 - Read replicas para escalado
 
 ### Cache
+
 - Redis para session storage
 - Cache de balances calculados
 - Cache de tasas de cambio
 
 ### API
+
 - Paginación en listados
 - Rate limiting
 - Compression (gzip)
@@ -212,18 +238,21 @@ Expenses → Split Calculator → Balance Aggregator → Settlement Suggestions
 ## Roadmap Técnico
 
 ### Fase 1 (Actual)
+
 - ✅ API básica con auth y CRUD
 - ✅ Calculadora de splits
 - ✅ Docker setup
 - ✅ CI/CD pipeline
 
 ### Fase 2
+
 - [ ] Frontend React completo
 - [ ] App React Native
 - [ ] Notificaciones push
 - [ ] Integración de pagos
 
 ### Fase 3
+
 - [ ] Microservicios
 - [ ] Event sourcing
 - [ ] Machine learning para categorización
@@ -232,12 +261,14 @@ Expenses → Split Calculator → Balance Aggregator → Settlement Suggestions
 ## Métricas de Éxito
 
 ### Técnicas
+
 - Uptime > 99.9%
 - Response time < 200ms (p95)
 - Zero downtime deployments
 - Test coverage > 90%
 
 ### Negocio
+
 - Time to market reducido
 - Facilidad de onboarding de desarrolladores
 - Escalabilidad sin refactoring mayor
