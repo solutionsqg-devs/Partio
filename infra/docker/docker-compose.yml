@@ -50,7 +50,6 @@ services:
     build:
       context: ../../apps/api
       dockerfile: Dockerfile
-      target: production
     container_name: partio-api
     restart: unless-stopped
     environment:
