@@ -22,7 +22,88 @@
    - Descargar desde: https://git-scm.com/
    - Verificar: `git --version`
 
-**¡Eso es todo!** No necesitas Docker, PostgreSQL, Redis ni nada más para probar la aplicación.
+**¡Eso es todo para el modo simple!** Para el modo completo con Docker, sigue leyendo.
+
+## 🐳 Setup con Docker (Modo Completo)
+
+Si quieres ejecutar el proyecto completo con base de datos y todos los servicios:
+
+### 1. **Requisitos adicionales**
+
+- **Docker Desktop** (Windows/Mac) o **Docker Engine** (Linux)
+  - Descargar desde: https://www.docker.com/products/docker-desktop/
+  - Verificar: `docker --version` y `docker-compose --version`
+
+### 2. **Configuración inicial**
+
+```bash
+# Copiar archivos de configuración
+cp apps/api/env.example apps/api/.env
+cp apps/web/env.example apps/web/.env
+```
+
+### 3. **Levantar Docker**
+
+```bash
+# Levantar todos los servicios
+pnpm run docker:dev
+
+# En otra terminal: ejecutar migraciones
+pnpm run migrate:dev
+
+# En otra terminal: cargar datos de ejemplo (opcional)
+pnpm run seed
+
+# En otra terminal: levantar el frontend
+pnpm --filter web run dev
+```
+
+### 4. **URLs disponibles**
+
+- **🎨 Frontend**: http://localhost:3000
+- **🔧 API**: http://localhost:4000
+- **📊 API Docs**: http://localhost:4000/api-docs
+- **🗄️ Adminer (Base de datos)**: http://localhost:8080
+  - Sistema: PostgreSQL
+  - Servidor: postgres
+  - Usuario: partio
+  - Contraseña: partio123
+  - Base de datos: partio_dev
+- **🔴 Redis Commander**: http://localhost:8081
+  - Usuario: admin
+  - Contraseña: admin123
+
+### 5. **Comandos útiles de Docker**
+
+```bash
+# Ver logs en tiempo real
+docker-compose -f infra/docker/docker-compose.yml logs -f
+
+# Ver logs solo del API
+docker logs -f partio-api
+
+# Detener todos los servicios
+pnpm run docker:down
+
+# Reiniciar solo el API
+docker-compose -f infra/docker/docker-compose.yml restart api
+```
+
+### 6. **Solución de problemas comunes**
+
+- **Error: Puerto ocupado**
+  ```bash
+  # Ver qué está usando el puerto
+  netstat -ano | findstr :4000  # Windows
+  lsof -i :4000                 # Mac/Linux
+  ```
+
+- **Error: Docker no responde**
+  ```bash
+  # Reiniciar Docker Desktop
+  # O limpiar contenedores
+  docker system prune -a
+  ```
 
 ## 🔄 Clonar el Proyecto
 
